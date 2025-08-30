@@ -9,7 +9,7 @@
 		"commit": "cz",
 		"format": "prettier --ignore-path .gitignore --write . '!{CODE_OF_CONDUCT.md,LICENSE-AGPL.md,LICENSE-CCBY.md,_layouts/default.html,package-lock.json,pnpm-lock.yaml,yarn.lock}'",
 		"prepare": "husky",
-		"changelog": "npm exec git-cliff -- --config cliff.toml",
+		"changelog": "pnpm exec git-cliff -- --config cliff.toml",
 		"enhance": "python enhance_metadata.py",
 		"test": "python test/test_metadata_enhancer.py"
 	},

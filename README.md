@@ -40,7 +40,7 @@ Data models and field mappings are documented in the [documentation/](documentat
 
 ### Metadata Enhancement Pipeline
 
-This repository includes an automated metadata enhancement pipeline that generates WCAG 2.2-compliant alternative text for images using OpenAI's newest GPT-4o model (gpt-4o-2024-11-20).
+This repository includes an automated metadata enhancement pipeline that generates WCAG 2.2-compliant alternative text for images using OpenAI's newest GPT-5 model.
 
 #### Prerequisites
 

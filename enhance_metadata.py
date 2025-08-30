@@ -3,7 +3,7 @@
 CLI interface for the Dublin Core Metadata Enhancer
 
 This script provides a command-line interface to enhance Dublin Core metadata
-by generating alternative text for images using OpenAI's newest GPT-4o model (gpt-4o-2024-11-20).
+by generating alternative text for images using OpenAI's newest GPT-5 model.
 """
 
 import argparse

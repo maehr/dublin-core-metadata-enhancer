@@ -38,7 +38,7 @@ graph TB
 
 ## Overview
 
-This pipeline uses OpenAI's newest GPT-4o model (gpt-4o-2024-11-20) multimodal capabilities to analyze images within their metadata context and generate appropriate alternative text descriptions in German.
+This pipeline uses OpenAI's newest GPT-5 model multimodal capabilities to analyze images within their metadata context and generate appropriate alternative text descriptions in German.
 
 ### Pipeline Architecture
 

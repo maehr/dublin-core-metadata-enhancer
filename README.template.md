@@ -25,9 +25,16 @@ The structure of this repository follows the [Advanced Structure for Data Analys
 
 ## Data Description
 
-- TODO Describe the data in this repository, including what it represents, how it was collected or obtained, any preprocessing or cleaning that was done, and any limitations or potential biases.
-- TODO Data models, including field names, descriptions, and controlled values, should be clearly documented in a static document that is maintained with the data and is part of the products.
-- TODO All rights and intellectual property issues should be clearly documented. Where possible, data and products should be released under open licenses (Creative Commons, GNU, BSD, MPL).
+This repository contains Dublin Core metadata enhancement tools and workflows designed to improve the quality and completeness of Dublin Core metadata records. The data includes:
+
+- **Enhancement Workflows**: Reproducible processes for enriching Dublin Core metadata
+- **Validation Tools**: Scripts and utilities for quality assurance of enhanced metadata
+- **Documentation**: Comprehensive guides and examples for using the enhancement pipelines
+- **Test Data**: Sample Dublin Core records for testing and validation purposes
+
+All enhancement workflows are documented and version-controlled to ensure reproducibility. The tools support various Dublin Core metadata formats and can be adapted for different types of digital collections.
+
+Data models and field mappings are documented in the [documentation/](documentation/) directory. All code is released under the AGPL-3.0 license, and data products are released under the Creative Commons Attribution 4.0 International (CC BY 4.0) license.
 
 ## Use
 

@@ -74,7 +74,7 @@ uv run python enhance_metadata.py --api-key "your-api-key"
 
 # Development commands
 uv run pytest                    # Run tests
-uv run mypy src/                 # Type checking
+uvx ty check src/                # Type checking
 uv run black .                   # Format code
 uv run ruff check .              # Lint code
 ```

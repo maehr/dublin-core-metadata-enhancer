@@ -307,7 +307,7 @@ Unit tests cover all major components:
 uv run pytest test/ -v
 
 # Run type checking
-uv run mypy src/
+uvx ty check src/
 
 # Run linting
 uv run ruff check .

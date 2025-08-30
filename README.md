@@ -151,7 +151,7 @@ We use [SemVer](http://semver.org/) for versioning. The available versions are l
 
 ## Authors and acknowledgment
 
-- **Moritz Mähr** - _Initial work_ - [maehr](https://github.com/maehr)
+- **Stadt.Geschichte.Basel** - _Initial work_ - [Stadt-Geschichte-Basel](https://github.com/Stadt-Geschichte-Basel)
 
 See also the list of [contributors](https://github.com/Stadt-Geschichte-Basel/dublin-core-metadata-enhancer/graphs/contributors) who contributed to this project.
 

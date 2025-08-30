@@ -1,8 +1,5 @@
 ---
 title: Dublin Core Metadata Enhancer
-format:
-  html:
-    embed-resources: true
 ---
 
 # Dublin Core Metadata Enhancer
@@ -13,10 +10,10 @@ This project provides tools and workflows to enhance Dublin Core metadata record
 
 The Dublin Core Metadata Enhancer enables:
 
-- **Automated Enhancement**: Systematic improvement of Dublin Core metadata records
-- **Reproducible Workflows**: Documented and repeatable enhancement processes  
-- **Quality Assurance**: Validation and verification of enhanced metadata
-- **Open Science**: Transparent and shareable enhancement methodologies
+-   **Automated Enhancement**: Systematic improvement of Dublin Core metadata records
+-   **Reproducible Workflows**: Documented and repeatable enhancement processes\
+-   **Quality Assurance**: Validation and verification of enhanced metadata
+-   **Open Science**: Transparent and shareable enhancement methodologies
 
 ## Scope
 
@@ -24,4 +21,4 @@ This repository contains the source code, documentation, and examples for enhanc
 
 For detailed documentation and usage examples, please see the full documentation in this repository.
 
-{{< include README.template.md >}}
+{{< include README.md >}}

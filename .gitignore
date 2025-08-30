@@ -486,6 +486,6 @@ $RECYCLE.BIN/
 
 # uv
 .uv/
-uv.lock
+# uv.lock
 
 /.quarto/

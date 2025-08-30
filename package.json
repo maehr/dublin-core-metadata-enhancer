@@ -1,8 +1,8 @@
 {
-	"name": "REPO_NAME",
-	"description": "SHORT_DESCRIPTION",
-	"author": "FULLNAME <[INSERT CONTACT METHOD]>",
-	"url": "https://github.com/USERNAME/REPO_NAME/issues",
+	"name": "dublin-core-metadata-enhancer",
+	"description": "Enhance Dublin Core records with reproducible enrichment workflows.",
+	"author": "Stadt.Geschichte.Basel <info@stadtgeschichtebasel.ch>",
+	"url": "https://github.com/Stadt-Geschichte-Basel/dublin-core-metadata-enhancer/issues",
 	"license": "AGPL-3.0",
 	"scripts": {
 		"check": "prettier --ignore-path .gitignore  --check . '!{CODE_OF_CONDUCT.md,LICENSE-AGPL.md,LICENSE-CCBY.md,_layouts/default.html,package-lock.json,pnpm-lock.yaml,yarn.lock}'",
@@ -15,7 +15,7 @@
 		"commitizen": "^4.3.1",
 		"cz": "^1.8.2",
 		"cz-conventional-changelog": "^3.3.0",
-		"git-cliff": "^2.9.1",
+		"git-cliff": "^2.10.0",
 		"husky": "^9.1.7",
 		"prettier": "^3.6.2"
 	},

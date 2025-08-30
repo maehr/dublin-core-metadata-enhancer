@@ -1,1 +1,26 @@
-# Go to https://citation-file-format.github.io/ to learn more about the Citation File Format.
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: Dublin Core Metadata Enhancer
+message: 'If you use this software, please cite it as below.'
+type: software
+authors:
+  - family-names: Mähr
+    affiliation: University of Basel
+    email: moritz.maehr@unibas.ch
+    given-names: Moritz
+    orcid: 'https://orcid.org/0000-0002-1367-1618'
+repository-code: >-
+  https://github.com/Stadt-Geschichte-Basel/dublin-core-metadata-enhancer
+url: >-
+  https://dokumentation.stadtgeschichtebasel.ch/dublin-core-metadata-enhancer
+abstract: >-
+  Enhance Dublin Core records with reproducible enrichment
+  workflows.
+keywords:
+  - dublin-core
+  - metadata
+  - enhancement
+  - reproducible-research
+license: AGPL-3.0

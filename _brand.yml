@@ -1,9 +1,9 @@
 meta:
-  name: REPO_NAME
+  name: dublin-core-metadata-enhancer
   link:
-    home: https://USERNAME.github.io/REPO_NAME
-    github: https://github.com/USERNAME
+    home: https://dokumentation.stadtgeschichtebasel.ch/dublin-core-metadata-enhancer
+    github: https://github.com/Stadt-Geschichte-Basel
   description: |
-    SHORT_DESCRIPTION
+    Enhance Dublin Core records with reproducible enrichment workflows.
 
 # Go to https://quarto.org/docs/authoring/brand.html to learn more about multiformat branding with brand.yml

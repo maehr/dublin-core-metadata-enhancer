@@ -1,8 +1,24 @@
 ---
-title: Open Research Data
-format:
-  html:
-    embed-resources: true
+title: Dublin Core Metadata Enhancer
 ---
+
+# Dublin Core Metadata Enhancer
+
+This project provides tools and workflows to enhance Dublin Core metadata records with reproducible enrichment processes. It aims to improve the quality and completeness of Dublin Core metadata through automated enrichment pipelines.
+
+## Purpose
+
+The Dublin Core Metadata Enhancer enables:
+
+-   **Automated Enhancement**: Systematic improvement of Dublin Core metadata records
+-   **Reproducible Workflows**: Documented and repeatable enhancement processes\
+-   **Quality Assurance**: Validation and verification of enhanced metadata
+-   **Open Science**: Transparent and shareable enhancement methodologies
+
+## Scope
+
+This repository contains the source code, documentation, and examples for enhancing Dublin Core metadata records. The enhancement workflows can be applied to various types of digital resources and collections.
+
+For detailed documentation and usage examples, please see the full documentation in this repository.
 
 {{< include README.md >}}

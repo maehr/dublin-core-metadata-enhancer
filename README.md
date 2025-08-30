@@ -38,6 +38,74 @@ Data models and field mappings are documented in the [documentation/](documentat
 
 ## Use
 
+### Metadata Enhancement Pipeline
+
+This repository includes an automated metadata enhancement pipeline that generates WCAG 2.2-compliant alternative text for images using OpenAI's GPT-4o API.
+
+#### Prerequisites
+
+1. Python 3.8 or higher
+2. OpenAI API key
+
+#### Installation
+
+```bash
+# Install Python dependencies
+pip install -r requirements.txt
+
+# Set your OpenAI API key
+export OPENAI_API_KEY="your-openai-api-key-here"
+```
+
+#### Usage
+
+```bash
+# Enhance metadata from the default source
+python enhance_metadata.py
+
+# Specify custom metadata URL and output file
+python enhance_metadata.py --metadata-url "https://example.com/metadata.json" --output "enhanced_metadata.json"
+
+# Use API key from command line
+python enhance_metadata.py --api-key "your-api-key"
+```
+
+#### How it works
+
+The enhancement pipeline:
+
+1. **Loads** Dublin Core metadata from a JSON source
+2. **Downloads** thumbnail images for each metadata object
+3. **Analyzes** images using GPT-4o with contextual metadata
+4. **Generates** WCAG-compliant alternative text in German
+5. **Outputs** enhanced metadata as JSON
+
+The AI prompt is designed to:
+
+- Identify image types (informative, complex diagrams/maps, or text images)
+- Generate appropriate alt text (max 120-200 characters)
+- Create long descriptions for complex content when needed
+- Follow accessibility best practices
+
+#### Output Format
+
+```json
+{
+	"objectid": "example001",
+	"alt_text": "Karte von Basel als befestigte Grenzstadt, umgeben von Breisgau und Sundgau.",
+	"longdesc": ""
+}
+```
+
+#### Testing
+
+```bash
+# Run tests
+python -m unittest test.test_metadata_enhancer
+```
+
+### Citation and Data Access
+
 These data are openly available to everyone and can be used for any research or educational purpose. If you use this data in your research, please cite as specified in [CITATION.cff](CITATION.cff). The following citation formats are also available through _Zenodo_:
 
 - [BibTeX](https://zenodo.org/record/ZENODO_RECORD/export/hx)

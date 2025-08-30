@@ -15,7 +15,7 @@ graph TB
         C[MetadataEnhancer Class]
         D[CLI Interface]
         E[Image Processing]
-        F[AI Analysis GPT-4o-2024-11-20]
+        F[AI Analysis GPT-5]
     end
 
     subgraph "Output"
@@ -47,7 +47,7 @@ graph TD
     A[Load Dublin Core Metadata] --> B[Extract Image URLs]
     B --> C[Download & Process Images]
     C --> D[Build Context Prompts]
-    D --> E[OpenAI GPT-4o Analysis]
+    D --> E[OpenAI GPT-5 Analysis]
     E --> F[Generate Alt Text]
     F --> G[Validate WCAG 2.2 Compliance]
     G --> H[Save Enhanced Metadata]
@@ -76,7 +76,7 @@ The main `MetadataEnhancer` class provides:
 - **Metadata Loading**: Fetch Dublin Core metadata from JSON URLs
 - **Image Processing**: Download and prepare images for AI analysis
 - **Prompt Generation**: Create contextual prompts using metadata
-- **AI Integration**: Generate alt text using OpenAI GPT-4o API
+- **AI Integration**: Generate alt text using OpenAI GPT-5 API
 - **Output Generation**: Save enhanced metadata as JSON
 
 ### CLI Interface (`enhance_metadata.py`)
@@ -187,7 +187,7 @@ graph LR
     G --> I
     H --> I
 
-    I --> J[Send to OpenAI GPT-4o]
+    I --> J[Send to OpenAI GPT-5]
     J --> K[Generate Contextual Alt Text]
 ```
 
@@ -240,7 +240,7 @@ graph LR
     F --> J
     G --> J
 
-    I --> K[OpenAI GPT-4o Processing]
+    I --> K[OpenAI GPT-5 Processing]
     J --> K
 
     K --> L[Generated Alt Text]

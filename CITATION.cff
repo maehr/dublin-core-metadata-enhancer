@@ -1,1 +1,17 @@
-# Go to https://citation-file-format.github.io/ to learn more about the Citation File Format.
+cff-version: 1.2.0
+message: 'If you use this software, please cite it as below.'
+type: software
+title: 'Dublin Core Metadata Enhancer'
+abstract: 'Enhance Dublin Core records with reproducible enrichment workflows.'
+authors:
+  - family-names: 'Stadt.Geschichte.Basel'
+    affiliation: 'Stadt Geschichte Basel'
+    email: 'info@stadtgeschichtebasel.ch'
+repository-code: 'https://github.com/Stadt-Geschichte-Basel/dublin-core-metadata-enhancer'
+url: 'https://Stadt-Geschichte-Basel.github.io/dublin-core-metadata-enhancer'
+license: 'AGPL-3.0'
+keywords:
+  - 'dublin-core'
+  - 'metadata'
+  - 'enhancement'
+  - 'reproducible-research'

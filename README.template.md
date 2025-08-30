@@ -1,12 +1,12 @@
-# REPO_NAME
+# dublin-core-metadata-enhancer
 
-This repository contains SHORT_DESCRIPTION. The data in this repository is openly available to everyone and is intended to support reproducible research.
+Enhance Dublin Core records with reproducible enrichment workflows. The data in this repository is openly available to everyone and is intended to support reproducible research.
 
-[![GitHub issues](https://img.shields.io/github/issues/USERNAME/REPO_NAME.svg)](https://github.com/USERNAME/REPO_NAME/issues)
-[![GitHub forks](https://img.shields.io/github/forks/USERNAME/REPO_NAME.svg)](https://github.com/USERNAME/REPO_NAME/network)
-[![GitHub stars](https://img.shields.io/github/stars/USERNAME/REPO_NAME.svg)](https://github.com/USERNAME/REPO_NAME/stargazers)
-[![Code license](https://img.shields.io/github/license/USERNAME/REPO_NAME.svg)](https://github.com/USERNAME/REPO_NAME/blob/main/LICENSE-AGPL.md)
-[![Data license](https://img.shields.io/github/license/USERNAME/REPO_NAME.svg)](https://github.com/USERNAME/REPO_NAME/blob/main/LICENSE-CCBY.md)
+[![GitHub issues](https://img.shields.io/github/issues/Stadt-Geschichte-Basel/dublin-core-metadata-enhancer.svg)](https://github.com/Stadt-Geschichte-Basel/dublin-core-metadata-enhancer/issues)
+[![GitHub forks](https://img.shields.io/github/forks/Stadt-Geschichte-Basel/dublin-core-metadata-enhancer.svg)](https://github.com/Stadt-Geschichte-Basel/dublin-core-metadata-enhancer/network)
+[![GitHub stars](https://img.shields.io/github/stars/Stadt-Geschichte-Basel/dublin-core-metadata-enhancer.svg)](https://github.com/Stadt-Geschichte-Basel/dublin-core-metadata-enhancer/stargazers)
+[![Code license](https://img.shields.io/github/license/Stadt-Geschichte-Basel/dublin-core-metadata-enhancer.svg)](https://github.com/Stadt-Geschichte-Basel/dublin-core-metadata-enhancer/blob/main/LICENSE-AGPL.md)
+[![Data license](https://img.shields.io/github/license/Stadt-Geschichte-Basel/dublin-core-metadata-enhancer.svg)](https://github.com/Stadt-Geschichte-Basel/dublin-core-metadata-enhancer/blob/main/LICENSE-CCBY.md)
 [![DOI](https://zenodo.org/badge/GITHUB_REPO_ID.svg)](https://zenodo.org/badge/latestdoi/ZENODO_RECORD)
 
 ## Repository Structure
@@ -51,16 +51,16 @@ curl -i https://zenodo.org/api/records/ZENODO_RECORD
 
 ## Support
 
-This project is maintained by [@USERNAME](https://github.com/USERNAME). Please understand that we can't provide individual support via email. We also believe that help is much more valuable when it's shared publicly, so more people can benefit from it.
+This project is maintained by [@Stadt-Geschichte-Basel](https://github.com/Stadt-Geschichte-Basel). Please understand that we can't provide individual support via email. We also believe that help is much more valuable when it's shared publicly, so more people can benefit from it.
 
-| Type                                   | Platforms                                                               |
-| -------------------------------------- | ----------------------------------------------------------------------- |
-| 🚨 **Bug Reports**                     | [GitHub Issue Tracker](https://github.com/USERNAME/REPO_NAME/issues)    |
-| 📊 **Report bad data**                 | [GitHub Issue Tracker](https://github.com/USERNAME/REPO_NAME/issues)    |
-| 📚 **Docs Issue**                      | [GitHub Issue Tracker](https://github.com/USERNAME/REPO_NAME/issues)    |
-| 🎁 **Feature Requests**                | [GitHub Issue Tracker](https://github.com/USERNAME/REPO_NAME/issues)    |
-| 🛡 **Report a security vulnerability** | See [SECURITY.md](SECURITY.md)                                          |
-| 💬 **General Questions**               | [GitHub Discussions](https://github.com/USERNAME/REPO_NAME/discussions) |
+| Type                                   | Platforms                                                                                                 |
+| -------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| 🚨 **Bug Reports**                     | [GitHub Issue Tracker](https://github.com/Stadt-Geschichte-Basel/dublin-core-metadata-enhancer/issues)    |
+| 📊 **Report bad data**                 | [GitHub Issue Tracker](https://github.com/Stadt-Geschichte-Basel/dublin-core-metadata-enhancer/issues)    |
+| 📚 **Docs Issue**                      | [GitHub Issue Tracker](https://github.com/Stadt-Geschichte-Basel/dublin-core-metadata-enhancer/issues)    |
+| 🎁 **Feature Requests**                | [GitHub Issue Tracker](https://github.com/Stadt-Geschichte-Basel/dublin-core-metadata-enhancer/issues)    |
+| 🛡 **Report a security vulnerability** | See [SECURITY.md](SECURITY.md)                                                                            |
+| 💬 **General Questions**               | [GitHub Discussions](https://github.com/Stadt-Geschichte-Basel/dublin-core-metadata-enhancer/discussions) |
 
 ## Roadmap
 
@@ -72,13 +72,13 @@ All contributions to this repository are welcome! If you find errors or problems
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. The available versions are listed in the [tags on this repository](https://github.com/USERNAME/REPO_NAME/tags).
+We use [SemVer](http://semver.org/) for versioning. The available versions are listed in the [tags on this repository](https://github.com/Stadt-Geschichte-Basel/dublin-core-metadata-enhancer/tags).
 
 ## Authors and acknowledgment
 
-- **FULLNAME** - _Initial work_ - [USERNAME](https://github.com/USERNAME)
+- **Stadt.Geschichte.Basel** - _Initial work_ - [Stadt-Geschichte-Basel](https://github.com/Stadt-Geschichte-Basel)
 
-See also the list of [contributors](https://github.com/USERNAME/REPO_NAME/graphs/contributors) who contributed to this project.
+See also the list of [contributors](https://github.com/Stadt-Geschichte-Basel/dublin-core-metadata-enhancer/graphs/contributors) who contributed to this project.
 
 ## License
 

@@ -50,8 +50,11 @@ This repository includes an automated metadata enhancement pipeline that generat
 #### Installation
 
 ```bash
+# Install uv (modern Python package manager)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
 # Install Python dependencies
-pip install -r requirements.txt
+uv sync
 
 # Set your OpenAI API key
 export OPENAI_API_KEY="your-openai-api-key-here"
@@ -61,13 +64,19 @@ export OPENAI_API_KEY="your-openai-api-key-here"
 
 ```bash
 # Enhance metadata from the default source
-python enhance_metadata.py
+uv run python enhance_metadata.py
 
 # Specify custom metadata URL and output file
-python enhance_metadata.py --metadata-url "https://example.com/metadata.json" --output "enhanced_metadata.json"
+uv run python enhance_metadata.py --metadata-url "https://example.com/metadata.json" --output "enhanced_metadata.json"
 
 # Use API key from command line
-python enhance_metadata.py --api-key "your-api-key"
+uv run python enhance_metadata.py --api-key "your-api-key"
+
+# Development commands
+uv run pytest                    # Run tests
+uv run mypy src/                 # Type checking
+uv run black .                   # Format code
+uv run ruff check .              # Lint code
 ```
 
 #### How it works
@@ -75,8 +84,8 @@ python enhance_metadata.py --api-key "your-api-key"
 The enhancement pipeline:
 
 1. **Loads** Dublin Core metadata from a JSON source
-2. **Downloads** thumbnail images for each metadata object
-3. **Analyzes** images using GPT-4o with contextual metadata
+2. **Downloads** thumbnail images (object_thumb field) - images are pre-optimized by omeka
+3. **Analyzes** images using GPT-5 with contextual metadata
 4. **Generates** WCAG-compliant alternative text in German
 5. **Outputs** enhanced metadata as JSON
 

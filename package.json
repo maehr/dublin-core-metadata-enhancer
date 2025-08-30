@@ -11,7 +11,12 @@
 		"prepare": "husky",
 		"changelog": "pnpm exec git-cliff -- --config cliff.toml",
 		"enhance": "python enhance_metadata.py",
-		"test": "python test/test_metadata_enhancer.py"
+		"test": "python test/test_metadata_enhancer.py",
+		"python:install": "uv sync",
+		"python:test": "uv run pytest",
+		"python:format": "uv run black . && uv run isort .",
+		"python:lint": "uv run ruff check . && uv run mypy src/",
+		"python:type-check": "uv run mypy src/"
 	},
 	"devDependencies": {
 		"@mermaid-js/mermaid-cli": "^11.9.0",

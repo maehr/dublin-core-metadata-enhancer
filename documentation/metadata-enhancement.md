@@ -44,18 +44,13 @@ This pipeline uses OpenAI's newest GPT-5 model multimodal capabilities to analyz
 
 ```{mermaid}
 graph TD
-    A[Load Dublin Core Metadata] --> B[Extract Image URLs]
-    B --> C[Download & Process Images]
+    A[Load Dublin Core Metadata] --> B[Extract object_thumb URLs]
+    B --> C[Download Images from Omeka]
     C --> D[Build Context Prompts]
     D --> E[OpenAI GPT-5 Analysis]
     E --> F[Generate Alt Text]
     F --> G[Validate WCAG 2.2 Compliance]
     G --> H[Save Enhanced Metadata]
-
-    C --> I[Image Preprocessing]
-    I --> J[Resize to 800x800 max]
-    J --> K[Format Optimization]
-    K --> D
 
     E --> L{Image Type Classification}
     L -->|Informative| M[Generate 1-2 sentences<br/>Max 120 chars]
@@ -307,13 +302,23 @@ Failed objects are logged and skipped, allowing the pipeline to continue process
 Unit tests cover all major components:
 
 ```bash
-python test/test_metadata_enhancer.py
+# Run tests with uv
+uv run pytest test/ -v
+
+# Run type checking
+uv run mypy src/
+
+# Run linting
+uv run ruff check .
+
+# Format code
+uv run black . && uv run isort .
 ```
 
 Tests use mocking to avoid API calls during development and validate:
 
 - Metadata extraction and prompt building
-- Image processing logic
+- Image downloading logic (no resizing - handled by omeka)
 - Error handling scenarios
 - CLI argument parsing
 
@@ -321,7 +326,7 @@ Tests use mocking to avoid API calls during development and validate:
 
 - **Batch Processing**: Process multiple objects in sequence
 - **Rate Limiting**: Respect OpenAI API limits
-- **Image Optimization**: Resize images to 800x800 maximum
+- **Image Handling**: Uses optimized thumbnail images from omeka (object_thumb field)
 - **Caching**: Consider implementing caching for repeated images
 
 ## Security

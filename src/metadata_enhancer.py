@@ -3,7 +3,7 @@
 Dublin Core Metadata Enhancer
 
 This module provides functionality to enhance Dublin Core metadata records
-by generating WCAG 2.2-compliant alternative text for images using OpenAI's GPT-4o API.
+by generating WCAG 2.2-compliant alternative text for images using OpenAI's newest GPT-4o model (gpt-4o-2024-11-20).
 """
 
 import json
@@ -22,7 +22,7 @@ class MetadataEnhancer:
         Initialize the metadata enhancer.
         
         Args:
-            openai_api_key: OpenAI API key for GPT-4o access
+            openai_api_key: OpenAI API key for GPT-4o-2024-11-20 access
         """
         self.openai_api_key = openai_api_key
         
@@ -171,7 +171,7 @@ Antworte **nur** als JSON wie im Beispiel:
         image_base64 = base64.b64encode(image_bytes).decode('utf-8')
         
         response = client.chat.completions.create(
-            model="gpt-4o",
+            model="gpt-4o-2024-11-20",  # Updated to newest OpenAI model (latest GPT-4o version)
             messages=[
                 {
                     "role": "system", 

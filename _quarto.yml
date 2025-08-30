@@ -29,9 +29,7 @@ website:
       - text: Home
         href: index.qmd
       - text: Documentation
-        menu:
-          - text: Metadata Enhancement
-            href: documentation/metadata-enhancement.md
+        href: documentation/index.qmd
 
   sidebar:
     contents:
@@ -53,7 +51,7 @@ website:
       - section: Documentation
         contents:
           - text: Metadata Enhancement Pipeline
-            href: documentation/metadata-enhancement.md
+            href: documentation/index.qmd
 
 format:
   html:

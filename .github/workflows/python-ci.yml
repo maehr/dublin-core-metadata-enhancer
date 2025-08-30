@@ -2,43 +2,43 @@ name: Python CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12"]
+        python-version: ['3.9', '3.10', '3.11', '3.12']
 
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Install uv
-      uses: astral-sh/setup-uv@v4
-      with:
-        enable-cache: true
-        cache-dependency-glob: "uv.lock"
-    
-    - name: Set up Python ${{ matrix.python-version }}
-      run: uv python install ${{ matrix.python-version }}
-    
-    - name: Install dependencies
-      run: uv sync --all-extras --dev
-    
-    - name: Run type checking
-      run: uv run mypy src/
-    
-    - name: Run linting
-      run: uv run ruff check .
-    
-    - name: Run formatting check
-      run: uv run black --check .
-    
-    - name: Run import sorting check
-      run: uv run isort --check-only .
-    
-    - name: Run tests
-      run: uv run pytest test/ -v
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          enable-cache: true
+          cache-dependency-glob: 'uv.lock'
+
+      - name: Set up Python ${{ matrix.python-version }}
+        run: uv python install ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: uv sync --all-extras --dev
+
+      - name: Run type checking
+        run: uv run mypy src/
+
+      - name: Run linting
+        run: uv run ruff check .
+
+      - name: Run formatting check
+        run: uv run black --check .
+
+      - name: Run import sorting check
+        run: uv run isort --check-only .
+
+      - name: Run tests
+        run: uv run pytest test/ -v

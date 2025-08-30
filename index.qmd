@@ -2,8 +2,6 @@
 title: Dublin Core Metadata Enhancer
 ---
 
-# Dublin Core Metadata Enhancer
-
 This project provides tools and workflows to enhance Dublin Core metadata records with reproducible enrichment processes. It aims to improve the quality and completeness of Dublin Core metadata through automated enrichment pipelines.
 
 ## Purpose

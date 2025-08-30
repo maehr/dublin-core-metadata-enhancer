@@ -145,22 +145,23 @@ The pipeline uses a carefully designed German prompt that follows a systematic d
 
 ```{mermaid}
 graph TD
-    A[Image Analysis Start] --> B{Contains readable text?}
-    B -->|Yes| C[Text Image Type]
-    C --> D[OCR-based alt text<br/>Transcribe visible text]
+  A[Image Analysis Start] --> B{Contains readable text?}
+  B -->|Yes| C[Text Image Type]
+  C --> D[OCR-based alt text<br/>Transcribe visible text]
 
-    B -->|No| E{Complex visual content?}
-    E -->|Yes - Maps/Diagrams| F[Complex Content Type]
-    F --> G[Generate descriptive alt text<br/>Max 200 chars + optional longdesc]
+  B -->|No| E{Complex visual content?}
+  E -->|Yes - Maps/Diagrams| F[Complex Content Type]
+  F --> G[Generate descriptive alt text<br/>Max 200 chars + optional longdesc]
 
-    E -->|No - Simple image| H[Informative Image Type]
-    H --> I[Generate concise description<br/>1-2 sentences, max 120 chars]
+  E -->|No - Simple image| H[Informative Image Type]
+  H --> I[Generate concise description<br/>1-2 sentences, max 120 chars]
 
-    D --> J[Apply WCAG 2.2 Guidelines]
-    G --> J
-    I --> J
+  D --> J[Apply WCAG 2.2 Guidelines]
+  G --> J
+  I --> J
 
-    J --> K[German language output<br/>No "Image of..." prefixes<br/>Contextual and descriptive]
+  J --> K[German language output<br/>No 'Image of...' prefixes<br/>Contextual and descriptive]
+
 ```
 
 ### Prompt Context Integration

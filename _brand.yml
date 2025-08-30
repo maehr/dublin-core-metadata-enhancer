@@ -1,7 +1,7 @@
 meta:
   name: dublin-core-metadata-enhancer
   link:
-    home: https://Stadt-Geschichte-Basel.github.io/dublin-core-metadata-enhancer
+    home: https://dokumentation.stadtgeschichtebasel.ch/dublin-core-metadata-enhancer
     github: https://github.com/Stadt-Geschichte-Basel
   description: |
     Enhance Dublin Core records with reproducible enrichment workflows.

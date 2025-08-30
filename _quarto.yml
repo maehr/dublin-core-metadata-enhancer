@@ -6,7 +6,7 @@ website:
   favicon: android-chrome-512x512.png
   open-graph: true
   twitter-card: true
-  site-url: https://Stadt-Geschichte-Basel.github.io/dublin-core-metadata-enhancer/
+  site-url: https://dokumentation.stadtgeschichtebasel.ch/dublin-core-metadata-enhancer/
   repo-url: https://github.com/Stadt-Geschichte-Basel/dublin-core-metadata-enhancer/
   issue-url: https://github.com/Stadt-Geschichte-Basel/dublin-core-metadata-enhancer/issues/new/choose
   repo-actions: [edit, issue]

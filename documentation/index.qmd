@@ -7,7 +7,7 @@ The Dublin Core Metadata Enhancer includes an automated pipeline for generating 
 ```{mermaid}
 graph TB
     subgraph "Input Sources"
-        A[Dublin Core JSON<br/>(Local File or URL)]
+        A[Dublin Core JSON<br/>Local File or URL]
         B[OpenAI API Key]
     end
 
@@ -44,7 +44,7 @@ This pipeline uses OpenAI's newest GPT-5 model multimodal capabilities to analyz
 
 ```{mermaid}
 graph TD
-    A[Load Dublin Core Metadata<br/>(Local File or URL)] --> B[Extract object_thumb URLs]
+    A[Load Dublin Core Metadata<br/>Local File or URL] --> B[Extract object_thumb URLs]
     B --> C[Download Images from Omeka]
     C --> D[Build Context Prompts]
     D --> E[OpenAI GPT-5 Analysis]
@@ -68,17 +68,17 @@ graph TD
 
 The main `MetadataEnhancer` class provides:
 
-- **Metadata Loading**: Fetch Dublin Core metadata from JSON URLs
-- **Image Processing**: Download and prepare images for AI analysis
-- **Prompt Generation**: Create contextual prompts using metadata
-- **AI Integration**: Generate alt text using OpenAI GPT-5 API
-- **Output Generation**: Save enhanced metadata as JSON
+-   **Metadata Loading**: Fetch Dublin Core metadata from JSON URLs
+-   **Image Processing**: Download and prepare images for AI analysis
+-   **Prompt Generation**: Create contextual prompts using metadata
+-   **AI Integration**: Generate alt text using OpenAI GPT-5 API
+-   **Output Generation**: Save enhanced metadata as JSON
 
 ### CLI Interface (`enhance_metadata.py`)
 
 Command-line tool for running the enhancement pipeline:
 
-```{bash}
+``` bash
 python enhance_metadata.py [options]
 ```
 
@@ -118,21 +118,21 @@ graph TD
 
 Options:
 
-- `--metadata-url`: Source path to local JSON file or URL for metadata JSON
-- `--output`: Output file for enhanced metadata
-- `--api-key`: OpenAI API key (or use environment variable)
+-   `--metadata-url`: Source path to local JSON file or URL for metadata JSON
+-   `--output`: Output file for enhanced metadata
+-   `--api-key`: OpenAI API key (or use environment variable)
 
 ### Configuration
 
 Set your OpenAI API key:
 
-```{bash}
+``` bash
 export OPENAI_API_KEY="your-openai-api-key-here"
 ```
 
 Or copy `example.env` to `.env` and configure:
 
-```{bash}
+``` bash
 cp example.env .env
 # Edit .env with your API key
 ```
@@ -188,19 +188,19 @@ graph LR
 
 The prompt design follows these principles:
 
-1. **Identifies image types**:
-    - Informative images (1-2 sentences, max 120 characters)
-    - Complex content like diagrams/maps (max 200 characters, optional long description)
-    - Text images (OCR-based alt text)
-2. **Incorporates metadata context**:
-    - Title, description, subject terms
-    - Historical era, creator, dates
-    - Collection and relationship information
-3. **Follows WCAG 2.2 guidelines**:
-    - Concise and descriptive
-    - No redundant "Image of..." prefixes
-    - German language output
-    - Structured JSON response
+1.  **Identifies image types**:
+    -   Informative images (1-2 sentences, max 120 characters)
+    -   Complex content like diagrams/maps (max 200 characters, optional long description)
+    -   Text images (OCR-based alt text)
+2.  **Incorporates metadata context**:
+    -   Title, description, subject terms
+    -   Historical era, creator, dates
+    -   Collection and relationship information
+3.  **Follows WCAG 2.2 guidelines**:
+    -   Concise and descriptive
+    -   No redundant "Image of..." prefixes
+    -   German language output
+    -   Structured JSON response
 
 ## Output Format
 
@@ -287,11 +287,11 @@ graph TD
 
 The pipeline handles various error scenarios:
 
-- Network connectivity issues
-- Invalid image formats
-- API rate limits and errors
-- Malformed metadata
-- Missing required fields
+-   Network connectivity issues
+-   Invalid image formats
+-   API rate limits and errors
+-   Malformed metadata
+-   Missing required fields
 
 Failed objects are logged and skipped, allowing the pipeline to continue processing other objects.
 
@@ -299,7 +299,7 @@ Failed objects are logged and skipped, allowing the pipeline to continue process
 
 Unit tests cover all major components:
 
-```{bash}
+``` bash
 # Run tests with uv
 uv run pytest test/ -v
 
@@ -315,20 +315,20 @@ uv run ruff format . && uv run ruff check --fix .
 
 Tests use mocking to avoid API calls during development and validate:
 
-- Metadata extraction and prompt building
-- Image downloading logic (no resizing - handled by omeka)
-- Error handling scenarios
-- CLI argument parsing
+-   Metadata extraction and prompt building
+-   Image downloading logic (no resizing - handled by omeka)
+-   Error handling scenarios
+-   CLI argument parsing
 
 ## Performance Considerations
 
-- **Batch Processing**: Process multiple objects in sequence
-- **Rate Limiting**: Respect OpenAI API limits
-- **Image Handling**: Uses optimized thumbnail images from omeka (object_thumb field)
-- **Caching**: Consider implementing caching for repeated images
+-   **Batch Processing**: Process multiple objects in sequence
+-   **Rate Limiting**: Respect OpenAI API limits
+-   **Image Handling**: Uses optimized thumbnail images from omeka (object_thumb field)
+-   **Caching**: Consider implementing caching for repeated images
 
 ## Security
 
-- API keys are handled securely through environment variables
-- No sensitive data is logged or stored in outputs
-- Image data is processed in memory only
+-   API keys are handled securely through environment variables
+-   No sensitive data is logged or stored in outputs
+-   Image data is processed in memory only

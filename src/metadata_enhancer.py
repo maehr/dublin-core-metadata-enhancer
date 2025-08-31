@@ -54,9 +54,7 @@ class MetadataEnhancer:
         console_handler.setLevel(logging.INFO)
 
         # Formatter
-        formatter = logging.Formatter(
-            "%(asctime)s - %(levelname)s - %(message)s"
-        )
+        formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
         file_handler.setFormatter(formatter)
         console_handler.setFormatter(formatter)
 
@@ -322,9 +320,7 @@ Antworte **nur** als JSON wie im Beispiel:
             choice = response.choices[0]
             self.logger.debug(f"Finish reason: {choice.finish_reason}")
             self.logger.debug(f"Message role: {choice.message.role}")
-            self.logger.debug(
-                f"Message content type: {type(choice.message.content)}"
-            )
+            self.logger.debug(f"Message content type: {type(choice.message.content)}")
             content_length = (
                 len(choice.message.content) if choice.message.content else 0
             )
@@ -389,10 +385,8 @@ Antworte **nur** als JSON wie im Beispiel:
         results = []
 
         for i, obj in enumerate(objects):
-            obj_id = obj.get('objectid', 'unknown')
-            self.logger.info(
-                f"Processing object {i + 1}/{len(objects)}: {obj_id}"
-            )
+            obj_id = obj.get("objectid", "unknown")
+            self.logger.info(f"Processing object {i + 1}/{len(objects)}: {obj_id}")
 
             metadata = self.get_metadata_for_prompt(obj)
             image_url = metadata.get("object_thumb")
@@ -424,7 +418,7 @@ Antworte **nur** als JSON wie im Beispiel:
                         raise ValueError("Response missing 'alt_text' field")
 
                     results.append(parsed_result)
-                    alt_preview = parsed_result.get('alt_text', '')[:50]
+                    alt_preview = parsed_result.get("alt_text", "")[:50]
                     self.logger.info(f"Generated alt text: {alt_preview}...")
                 except json.JSONDecodeError as e:
                     raise ValueError(

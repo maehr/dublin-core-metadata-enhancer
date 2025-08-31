@@ -109,10 +109,14 @@ class TestMetadataEnhancer(unittest.TestCase):
         mock_response.raise_for_status.return_value = None
         mock_get.return_value = mock_response
 
-        result = self.enhancer.load_metadata("https://forschung.stadtgeschichtebasel.ch/assets/data/metadata.json")
+        result = self.enhancer.load_metadata(
+            "https://forschung.stadtgeschichtebasel.ch/assets/data/metadata.json"
+        )
 
         self.assertEqual(result["objects"], [self.sample_object])
-        mock_get.assert_called_once_with("https://forschung.stadtgeschichtebasel.ch/assets/data/metadata.json")
+        mock_get.assert_called_once_with(
+            "https://forschung.stadtgeschichtebasel.ch/assets/data/metadata.json"
+        )
 
     def test_load_metadata_from_local_file(self):
         """Test metadata loading from local file."""

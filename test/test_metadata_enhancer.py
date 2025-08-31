@@ -101,7 +101,7 @@ class TestMetadataEnhancer(unittest.TestCase):
         self.assertIn("single creator", prompt)
 
     @patch("requests.get")
-    def test_load_metadata(self, mock_get):
+    def test_load_metadata_from_url(self, mock_get):
         """Test metadata loading from URL."""
         # Mock successful response
         mock_response = Mock()
@@ -113,6 +113,50 @@ class TestMetadataEnhancer(unittest.TestCase):
 
         self.assertEqual(result["objects"], [self.sample_object])
         mock_get.assert_called_once_with("https://forschung.stadtgeschichtebasel.ch/assets/data/metadata.json")
+
+    def test_load_metadata_from_local_file(self):
+        """Test metadata loading from local file."""
+        # Use the sample file we created
+        test_file_path = os.path.join(os.path.dirname(__file__), "sample_metadata.json")
+
+        result = self.enhancer.load_metadata(test_file_path)
+
+        self.assertIn("objects", result)
+        self.assertEqual(len(result["objects"]), 1)
+        self.assertEqual(result["objects"][0]["objectid"], "local_test001")
+
+    def test_load_metadata_invalid_local_file(self):
+        """Test error handling for non-existent local file."""
+        with self.assertRaises(FileNotFoundError):
+            self.enhancer.load_metadata("/nonexistent/path/to/file.json")
+
+    def test_load_metadata_invalid_json_local_file(self):
+        """Test error handling for invalid JSON in local file."""
+        # Create a temporary invalid JSON file
+        invalid_json_path = os.path.join(os.path.dirname(__file__), "invalid.json")
+        with open(invalid_json_path, "w") as f:
+            f.write("{ invalid json")
+
+        try:
+            with self.assertRaises(ValueError):
+                self.enhancer.load_metadata(invalid_json_path)
+        finally:
+            # Clean up
+            if os.path.exists(invalid_json_path):
+                os.remove(invalid_json_path)
+
+    def test_is_local_file(self):
+        """Test the _is_local_file helper method."""
+        # Test URLs
+        self.assertFalse(self.enhancer._is_local_file("https://example.com/file.json"))
+        self.assertFalse(self.enhancer._is_local_file("http://example.com/file.json"))
+
+        # Test local paths
+        test_file_path = os.path.join(os.path.dirname(__file__), "sample_metadata.json")
+        self.assertTrue(self.enhancer._is_local_file(test_file_path))
+
+        # Test non-existent file (should still be considered local path)
+        self.assertTrue(self.enhancer._is_local_file("/some/local/path.json"))
 
     @patch("requests.get")
     def test_get_image_bytes(self, mock_get):

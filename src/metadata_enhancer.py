@@ -9,7 +9,9 @@ newest GPT-5 model.
 
 import json
 import os
+from pathlib import Path
 from typing import Any
+from urllib.parse import urlparse
 
 import requests
 
@@ -26,22 +28,60 @@ class MetadataEnhancer:
         """
         self.openai_api_key = openai_api_key
 
-    def load_metadata(self, url: str) -> dict[str, Any]:
+    def load_metadata(self, source: str) -> dict[str, Any]:
         """
-        Load metadata from a JSON URL.
+        Load metadata from a JSON file or URL.
 
         Args:
-            url: URL to the JSON metadata file
+            source: Path to local JSON file or URL to the JSON metadata file
 
         Returns:
             Dictionary containing the loaded metadata
         """
-        response = requests.get(url)
-        response.raise_for_status()
-        data = response.json()
+        # Check if source is a local file path
+        if self._is_local_file(source):
+            try:
+                with open(source, encoding="utf-8") as f:
+                    data = json.load(f)
+            except FileNotFoundError as e:
+                raise FileNotFoundError(f"Local file not found: {source}") from e
+            except json.JSONDecodeError as e:
+                raise ValueError(f"Invalid JSON in local file {source}: {e}") from e
+        else:
+            # Treat as URL
+            try:
+                response = requests.get(source)
+                response.raise_for_status()
+                data = response.json()
+            except requests.RequestException as e:
+                raise ValueError(
+                    f"Failed to load metadata from URL {source}: {e}"
+                ) from e
+            except json.JSONDecodeError as e:
+                raise ValueError(f"Invalid JSON from URL {source}: {e}") from e
+
         if not isinstance(data, dict):
             raise ValueError("Expected JSON object, got different type")
         return data
+
+    def _is_local_file(self, source: str) -> bool:
+        """
+        Determine if source is a local file path or URL.
+
+        Args:
+            source: Source string to check
+
+        Returns:
+            True if it's a local file path, False if it's a URL
+        """
+        # Parse as URL and check if it has a scheme (http/https)
+        parsed = urlparse(source)
+        if parsed.scheme in ("http", "https"):
+            return False
+
+        # Check if it's a valid file path
+        path = Path(source)
+        return path.exists() or not parsed.scheme
 
     def get_metadata_for_prompt(self, obj: dict[str, Any]) -> dict[str, Any]:
         """
@@ -106,15 +146,15 @@ class MetadataEnhancer:
         prompt = f"""Du bist ein Spezialist für barrierefreie Alternativtexte (WCAG).
 Das folgende Bild stammt von „forschung.stadtgeschichtebasel.ch" und diese Metadaten:
 
-Titel: {metadata.get('title', '')}
-Beschreibung: {metadata.get('description', '')}
+Titel: {metadata.get("title", "")}
+Beschreibung: {metadata.get("description", "")}
 Thema: {subject_str}
-Zeitraum: {metadata.get('coverage', '')}
+Zeitraum: {metadata.get("coverage", "")}
 Schöpfer: {creator_str}
-Datum: {metadata.get('date', '')}
+Datum: {metadata.get("date", "")}
 Teil von: {is_part_of_str}
 Verweise: {relation_str}
-Sprache: {metadata.get('language', '')}
+Sprache: {metadata.get("language", "")}
 
 Analysiere das Bild (siehe separate Bildübertragung) zusammen mit den Metadaten.
 
@@ -132,7 +172,7 @@ maximal 120 Zeichen (informativ/Text), maximal 200 Zeichen (komplex).
 
 Antworte **nur** als JSON wie im Beispiel:
 {{
-  "objectid": "{metadata.get('objectid', '')}",
+  "objectid": "{metadata.get("objectid", "")}",
   "alt_text": "…",
   "longdesc": "…"  // optional, nur falls nötig
 }}"""
@@ -212,27 +252,27 @@ Antworte **nur** als JSON wie im Beispiel:
         return content
 
     def enhance_metadata(
-        self, metadata_url: str, output_file: str = "alttexte_automatisch.json"
+        self, metadata_source: str, output_file: str = "alttexte_automatisch.json"
     ) -> list[dict[str, Any]]:
         """
         Main method to enhance metadata for all objects.
 
         Args:
-            metadata_url: URL to the metadata JSON file
+            metadata_source: Path to local JSON file or URL to the metadata JSON file
             output_file: Output file name for enhanced metadata
 
         Returns:
             List of enhanced metadata objects
         """
-        print(f"Loading metadata from {metadata_url}...")
-        data = self.load_metadata(metadata_url)
+        print(f"Loading metadata from {metadata_source}...")
+        data = self.load_metadata(metadata_source)
         objects = data.get("objects", [])
 
         results = []
 
         for i, obj in enumerate(objects):
             print(
-                f"Processing object {i+1}/{len(objects)}: "
+                f"Processing object {i + 1}/{len(objects)}: "
                 f"{obj.get('objectid', 'unknown')}"
             )
 
@@ -288,13 +328,15 @@ def main() -> int:
         print("export OPENAI_API_KEY='your-api-key-here'")
         return 1
 
-    # Default metadata URL from the issue
-    metadata_url = "https://forschung.stadtgeschichtebasel.ch/assets/data/metadata.json"
+    # Default metadata source from the issue
+    metadata_source = (
+        "https://forschung.stadtgeschichtebasel.ch/assets/data/metadata.json"
+    )
 
     enhancer = MetadataEnhancer(api_key)
 
     try:
-        results = enhancer.enhance_metadata(metadata_url)
+        results = enhancer.enhance_metadata(metadata_source)
         print(f"✓ Successfully enhanced {len(results)} metadata objects")
         return 0
     except Exception as e:

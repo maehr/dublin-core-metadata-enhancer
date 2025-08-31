@@ -67,7 +67,11 @@ export OPENAI_API_KEY="your-openai-api-key-here"
 uv run python enhance_metadata.py
 
 # Specify custom metadata URL and output file
+# Run enhancement on remote metadata
 uv run python enhance_metadata.py --metadata-url "https://example.com/metadata.json" --output "enhanced_metadata.json"
+
+# Run enhancement on local metadata file
+uv run python enhance_metadata.py --metadata-url "data/local_metadata.json" --output "enhanced_local.json"
 
 # Use API key from command line
 uv run python enhance_metadata.py --api-key "your-api-key"
@@ -75,15 +79,15 @@ uv run python enhance_metadata.py --api-key "your-api-key"
 # Development commands
 uv run pytest                    # Run tests
 uvx ty check src/                # Type checking
-uv run black .                   # Format code
-uv run ruff check .              # Lint code
+uv run ruff format .             # Format code with ruff
+uv run ruff check .              # Lint code with ruff
 ```
 
 #### How it works
 
 The enhancement pipeline:
 
-1. **Loads** Dublin Core metadata from a JSON source
+1. **Loads** Dublin Core metadata from a JSON source (local file or URL)
 2. **Downloads** thumbnail images (object_thumb field) - images are pre-optimized by omeka
 3. **Analyzes** images using GPT-5 with contextual metadata
 4. **Generates** WCAG-compliant alternative text in German

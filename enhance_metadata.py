@@ -26,7 +26,8 @@ def main() -> int:
     parser.add_argument(
         "--metadata-url",
         default="https://forschung.stadtgeschichtebasel.ch/assets/data/metadata.json",
-        help="URL to the metadata JSON file (default: %(default)s)",
+        help="Path to local JSON file or URL to the metadata JSON file "
+        "(default: %(default)s)",
     )
 
     parser.add_argument(

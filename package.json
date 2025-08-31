@@ -14,7 +14,7 @@
 		"test": "python test/test_metadata_enhancer.py",
 		"python:install": "uv sync",
 		"python:test": "uv run pytest",
-		"python:format": "uv run black . && uv run isort .",
+		"python:format": "uv run ruff format . && uv run ruff check --fix .",
 		"python:lint": "uv run ruff check . && uvx ty check src/",
 		"python:type-check": "uvx ty check src/"
 	},

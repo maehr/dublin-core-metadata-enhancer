@@ -1,0 +1,17 @@
+{
+  "objects": [
+    {
+      "objectid": "local_test001",
+      "title": "Test Local Image",
+      "description": "A test image for local file parsing",
+      "subject": ["testing", "local"],
+      "coverage": "modern",
+      "creator": ["Test Author"],
+      "date": "2024",
+      "isPartOf": ["Local Test Collection"],
+      "relation": [],
+      "language": "de",
+      "object_thumb": "https://example.com/local_test.jpg"
+    }
+  ]
+}

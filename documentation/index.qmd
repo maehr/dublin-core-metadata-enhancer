@@ -7,7 +7,7 @@ The Dublin Core Metadata Enhancer includes an automated pipeline for generating 
 ```{mermaid}
 graph TB
     subgraph "Input Sources"
-        A[Dublin Core JSON URL]
+        A[Dublin Core JSON<br/>(Local File or URL)]
         B[OpenAI API Key]
     end
 
@@ -44,7 +44,7 @@ This pipeline uses OpenAI's newest GPT-5 model multimodal capabilities to analyz
 
 ```{mermaid}
 graph TD
-    A[Load Dublin Core Metadata] --> B[Extract object_thumb URLs]
+    A[Load Dublin Core Metadata<br/>(Local File or URL)] --> B[Extract object_thumb URLs]
     B --> C[Download Images from Omeka]
     C --> D[Build Context Prompts]
     D --> E[OpenAI GPT-5 Analysis]
@@ -118,7 +118,7 @@ graph TD
 
 Options:
 
-- `--metadata-url`: Source URL for metadata JSON
+- `--metadata-url`: Source path to local JSON file or URL for metadata JSON
 - `--output`: Output file for enhanced metadata
 - `--api-key`: OpenAI API key (or use environment variable)
 
@@ -309,8 +309,8 @@ uvx ty check src/
 # Run linting
 uv run ruff check .
 
-# Format code
-uv run black . && uv run isort .
+# Format code  
+uv run ruff format . && uv run ruff check --fix .
 ```
 
 Tests use mocking to avoid API calls during development and validate:

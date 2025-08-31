@@ -12,7 +12,7 @@ import logging
 import os
 from datetime import datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, Optional
 from urllib.parse import urlparse
 
 import requests
@@ -358,7 +358,7 @@ Antworte **nur** als JSON wie im Beispiel:
         return content.strip()
 
     def enhance_metadata(
-        self, metadata_source: str, output_file: str = None
+        self, metadata_source: str, output_file: Optional[str] = None
     ) -> list[dict[str, Any]]:
         """
         Main method to enhance metadata for all objects.

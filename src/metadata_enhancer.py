@@ -17,6 +17,13 @@ from urllib.parse import urlparse
 
 import requests
 
+# Import iconclass_classifier with proper path handling
+try:
+    from .iconclass_classifier import IconclassClassifier
+except ImportError:
+    # Fallback for direct execution
+    from iconclass_classifier import IconclassClassifier
+
 
 class MetadataEnhancer:
     """Main class for enhancing Dublin Core metadata with AI-generated alt text."""
@@ -30,6 +37,8 @@ class MetadataEnhancer:
         """
         self.openai_api_key = openai_api_key
         self.logger = None
+        self.iconclass_enabled = os.getenv("ICONCLASS_ENABLE", "true").lower() == "true"
+        self.iconclass_classifier = None
 
     def _setup_logging(self, log_filename: str) -> None:
         """
@@ -416,6 +425,38 @@ Antworte **nur** als JSON wie im Beispiel:
 
                     if "alt_text" not in parsed_result:
                         raise ValueError("Response missing 'alt_text' field")
+
+                    # Add Iconclass subject classification if enabled
+                    if self.iconclass_enabled:
+                        if self.iconclass_classifier is None:
+                            # Initialize classifier with OpenAI client
+                            try:
+                                import openai
+                                client = openai.OpenAI(api_key=self.openai_api_key)
+                                self.iconclass_classifier = IconclassClassifier(client)
+                            except ImportError:
+                                self.logger.warning(
+                                    "OpenAI package not available for Iconclass "
+                                    "classification"
+                                )
+                                self.iconclass_enabled = False
+
+                        if self.iconclass_classifier:
+                            self.logger.info("Generating Iconclass subjects...")
+                            try:
+                                subjects = self.iconclass_classifier.classify_object(
+                                    obj
+                                )
+                                parsed_result["subjects"] = subjects
+                                self.logger.info(
+                                    f"Generated {len(subjects)} Iconclass subjects"
+                                )
+                            except Exception as e:
+                                self.logger.warning(
+                                    f"Iconclass classification failed: {e}"
+                                )
+                                # Continue without subjects - don't fail the entire
+                                # process
 
                     results.append(parsed_result)
                     alt_preview = parsed_result.get("alt_text", "")[:50]

@@ -33,7 +33,7 @@ class TestMetadataEnhancer(unittest.TestCase):
             "isPartOf": ["Test Collection"],
             "relation": ["test-relation"],
             "language": "de",
-            "object_thumb": "https://example.com/test.jpg",
+            "object_thumb": "https://upload.wikimedia.org/wikipedia/en/a/a9/Example.jpg",
         }
 
     def test_get_metadata_for_prompt(self):
@@ -109,10 +109,10 @@ class TestMetadataEnhancer(unittest.TestCase):
         mock_response.raise_for_status.return_value = None
         mock_get.return_value = mock_response
 
-        result = self.enhancer.load_metadata("https://example.com/metadata.json")
+        result = self.enhancer.load_metadata("https://forschung.stadtgeschichtebasel.ch/assets/data/metadata.json")
 
         self.assertEqual(result["objects"], [self.sample_object])
-        mock_get.assert_called_once_with("https://example.com/metadata.json")
+        mock_get.assert_called_once_with("https://forschung.stadtgeschichtebasel.ch/assets/data/metadata.json")
 
     @patch("requests.get")
     def test_get_image_bytes(self, mock_get):

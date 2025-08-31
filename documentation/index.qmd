@@ -78,7 +78,7 @@ The main `MetadataEnhancer` class provides:
 
 Command-line tool for running the enhancement pipeline:
 
-```bash
+```{bash}
 python enhance_metadata.py [options]
 ```
 
@@ -126,13 +126,13 @@ Options:
 
 Set your OpenAI API key:
 
-```bash
+```{bash}
 export OPENAI_API_KEY="your-openai-api-key-here"
 ```
 
 Or copy `example.env` to `.env` and configure:
 
-```bash
+```{bash}
 cp example.env .env
 # Edit .env with your API key
 ```
@@ -161,7 +161,6 @@ graph TD
   I --> J
 
   J --> K[German language output<br/>No 'Image of...' prefixes<br/>Contextual and descriptive]
-
 ```
 
 ### Prompt Context Integration
@@ -190,30 +189,28 @@ graph LR
 The prompt design follows these principles:
 
 1. **Identifies image types**:
-   - Informative images (1-2 sentences, max 120 characters)
-   - Complex content like diagrams/maps (max 200 characters, optional long description)
-   - Text images (OCR-based alt text)
-
+    - Informative images (1-2 sentences, max 120 characters)
+    - Complex content like diagrams/maps (max 200 characters, optional long description)
+    - Text images (OCR-based alt text)
 2. **Incorporates metadata context**:
-   - Title, description, subject terms
-   - Historical era, creator, dates
-   - Collection and relationship information
-
+    - Title, description, subject terms
+    - Historical era, creator, dates
+    - Collection and relationship information
 3. **Follows WCAG 2.2 guidelines**:
-   - Concise and descriptive
-   - No redundant "Image of..." prefixes
-   - German language output
-   - Structured JSON response
+    - Concise and descriptive
+    - No redundant "Image of..." prefixes
+    - German language output
+    - Structured JSON response
 
 ## Output Format
 
 Enhanced metadata objects include:
 
-```json
+``` json
 {
-	"objectid": "unique-identifier",
-	"alt_text": "Descriptive alternative text in German",
-	"longdesc": "Optional detailed description for complex content"
+    "objectid": "unique-identifier",
+    "alt_text": "Descriptive alternative text in German",
+    "longdesc": "Optional detailed description for complex content"
 }
 ```
 
@@ -302,7 +299,7 @@ Failed objects are logged and skipped, allowing the pipeline to continue process
 
 Unit tests cover all major components:
 
-```bash
+```{bash}
 # Run tests with uv
 uv run pytest test/ -v
 

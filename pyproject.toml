@@ -32,6 +32,9 @@ Issues = "https://github.com/maehr/dublin-core-metadata-enhancer/issues"
 [project.scripts]
 enhance-metadata = "enhance_metadata:main"
 
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
 [tool.ruff]
 line-length = 88
 target-version = "py39"

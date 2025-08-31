@@ -33,7 +33,7 @@ class TestMetadataEnhancer(unittest.TestCase):
             "isPartOf": ["Test Collection"],
             "relation": ["test-relation"],
             "language": "de",
-            "object_thumb": "https://upload.wikimedia.org/wikipedia/en/a/a9/Example.jpg",
+            "object_thumb": "https://forschung.stadtgeschichtebasel.ch/objects/463ab9d5e25a59666877a3a80aaadd6aaac13509.jpg",
         }
 
     def test_get_metadata_for_prompt(self):

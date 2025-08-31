@@ -242,8 +242,7 @@ Antworte **nur** als JSON wie im Beispiel:
                     ],
                 },
             ],
-            max_tokens=400,
-            temperature=0.2,
+            max_completion_tokens=1000
         )
 
         content = response.choices[0].message.content

@@ -12,7 +12,7 @@ import logging
 import os
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 from urllib.parse import urlparse
 
 import requests
@@ -340,7 +340,7 @@ Antworte **nur** als JSON wie im Beispiel:
                 finish_reason = response.choices[0].finish_reason
                 self.logger.error(f"Message content: '{content}'")
                 self.logger.error(f"Finish reason: {finish_reason}")
-                
+
                 if finish_reason == "length":
                     raise ValueError(
                         "OpenAI API response was cut off due to "
@@ -358,7 +358,7 @@ Antworte **nur** als JSON wie im Beispiel:
         return content.strip()
 
     def enhance_metadata(
-        self, metadata_source: str, output_file: Optional[str] = None
+        self, metadata_source: str, output_file: str | None = None
     ) -> list[dict[str, Any]]:
         """
         Main method to enhance metadata for all objects.

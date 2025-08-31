@@ -25,9 +25,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/maehr/dublin-core-metadata-enhancer"
-Repository = "https://github.com/maehr/dublin-core-metadata-enhancer"
-Issues = "https://github.com/maehr/dublin-core-metadata-enhancer/issues"
+Homepage = "https://github.com/stadt-geschichte-basel/dublin-core-metadata-enhancer"
+Repository = "https://github.com/stadt-geschichte-basel/dublin-core-metadata-enhancer"
+Issues = "https://github.com/stadt-geschichte-basel/dublin-core-metadata-enhancer/issues"
 
 [project.scripts]
 enhance-metadata = "enhance_metadata:main"
@@ -37,7 +37,7 @@ packages = ["src"]
 
 [tool.ruff]
 line-length = 88
-target-version = "py39"
+target-version = "py313"
 
 [tool.ruff.lint]
 select = [

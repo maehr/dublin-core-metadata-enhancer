@@ -9,9 +9,17 @@
 		"commit": "cz",
 		"format": "prettier --ignore-path .gitignore --write . '!{CODE_OF_CONDUCT.md,LICENSE-AGPL.md,LICENSE-CCBY.md,_layouts/default.html,package-lock.json,pnpm-lock.yaml,yarn.lock}'",
 		"prepare": "husky",
-		"changelog": "npm exec git-cliff -- --config cliff.toml"
+		"changelog": "pnpm exec git-cliff -- --config cliff.toml",
+		"enhance": "python enhance_metadata.py",
+		"test": "python test/test_metadata_enhancer.py",
+		"python:install": "uv sync",
+		"python:test": "uv run pytest",
+		"python:format": "uvx ruff format . && uvx ruff check --fix .",
+		"python:lint": "uvx ruff check . && uvx ty check src/",
+		"python:type-check": "uvx ty check src/"
 	},
 	"devDependencies": {
+		"@mermaid-js/mermaid-cli": "^11.9.0",
 		"commitizen": "^4.3.1",
 		"cz": "^1.8.2",
 		"cz-conventional-changelog": "^3.3.0",

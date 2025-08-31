@@ -38,6 +38,87 @@ Data models and field mappings are documented in the [documentation/](documentat
 
 ## Use
 
+### Metadata Enhancement Pipeline
+
+This repository includes an automated metadata enhancement pipeline that generates WCAG 2.2-compliant alternative text for images using OpenAI's newest GPT-5 model.
+
+#### Prerequisites
+
+1. Python 3.8 or higher
+2. OpenAI API key
+
+#### Installation
+
+```bash
+# Install uv (modern Python package manager)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Install Python dependencies
+uv sync
+
+# Set your OpenAI API key
+export OPENAI_API_KEY="your-openai-api-key-here"
+```
+
+#### Usage
+
+```bash
+# Enhance metadata from the default source
+uv run python enhance_metadata.py
+
+# Specify custom metadata URL and output file
+# Run enhancement on remote metadata
+uv run python enhance_metadata.py --metadata-url "https://example.com/metadata.json" --output "enhanced_metadata.json"
+
+# Run enhancement on local metadata file
+uv run python enhance_metadata.py --metadata-url "data/local_metadata.json" --output "enhanced_local.json"
+
+# Use API key from command line
+uv run python enhance_metadata.py --api-key "your-api-key"
+
+# Development commands
+uv run pytest                    # Run tests
+uvx ty check src/                # Type checking
+uv run ruff format .             # Format code with ruff
+uv run ruff check .              # Lint code with ruff
+```
+
+#### How it works
+
+The enhancement pipeline:
+
+1. **Loads** Dublin Core metadata from a JSON source (local file or URL)
+2. **Downloads** thumbnail images (object_thumb field) - images are pre-optimized by omeka
+3. **Analyzes** images using GPT-5 with contextual metadata
+4. **Generates** WCAG-compliant alternative text in German
+5. **Outputs** enhanced metadata as JSON
+
+The AI prompt is designed to:
+
+- Identify image types (informative, complex diagrams/maps, or text images)
+- Generate appropriate alt text (max 120-200 characters)
+- Create long descriptions for complex content when needed
+- Follow accessibility best practices
+
+#### Output Format
+
+```json
+{
+	"objectid": "example001",
+	"alt_text": "Karte von Basel als befestigte Grenzstadt, umgeben von Breisgau und Sundgau.",
+	"longdesc": ""
+}
+```
+
+#### Testing
+
+```bash
+# Run tests
+python -m unittest test.test_metadata_enhancer
+```
+
+### Citation and Data Access
+
 These data are openly available to everyone and can be used for any research or educational purpose. If you use this data in your research, please cite as specified in [CITATION.cff](CITATION.cff). The following citation formats are also available through _Zenodo_:
 
 - [BibTeX](https://zenodo.org/record/ZENODO_RECORD/export/hx)

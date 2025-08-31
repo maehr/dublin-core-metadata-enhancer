@@ -26,10 +26,10 @@ website:
         url: https://github.com/Stadt-Geschichte-Basel/dublin-core-metadata-enhancer/
         aria-label: GitHub Repository
     left:
-      - text: Readme
+      - text: Home
         href: index.qmd
-      - text: Report
-        href: report.md
+      - text: Documentation
+        href: documentation/index.qmd
 
   sidebar:
     contents:
@@ -48,8 +48,10 @@ website:
             href: LICENSE-AGPL.md
           - text: Security
             href: SECURITY.md
-      - href: report.md
-        contents: project-management/*
+      - section: Documentation
+        contents:
+          - text: Metadata Enhancement Pipeline
+            href: documentation/index.qmd
 
 format:
   html:
@@ -60,6 +62,8 @@ format:
     code-overflow: wrap
     css: styles.css
     mainfont: Euclid Circular B
+    mermaid:
+      theme: neutral
 
 freeze: true
 

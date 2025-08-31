@@ -32,8 +32,8 @@ def main() -> int:
 
     parser.add_argument(
         "--output",
-        default="alttexte_automatisch.json",
-        help="Output file for enhanced metadata (default: %(default)s)",
+        help="Output file for enhanced metadata (if not specified, "
+        "auto-generated with timestamp)",
     )
 
     parser.add_argument(
@@ -56,7 +56,6 @@ def main() -> int:
         enhancer = MetadataEnhancer(api_key)
         results = enhancer.enhance_metadata(args.metadata_url, args.output)
         print(f"✓ Successfully enhanced {len(results)} metadata objects")
-        print(f"✓ Results saved to {args.output}")
         return 0
     except Exception as e:
         print(f"✗ Error: {e}")

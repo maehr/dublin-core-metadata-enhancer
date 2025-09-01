@@ -20,6 +20,10 @@ The structure of this repository follows the [Advanced Structure for Data Analys
 - `documentation/`: documentation for the data and the repository
 - `project-management/`: project management documents (e.g., meeting notes, project plans, etc.)
 - `src/`: source code for the data (e.g., scripts used to collect or process the data)
+  - `alt_text_generator.py`: WCAG 2.2-compliant alternative text generation using GPT-5
+  - `iconclass_classifier.py`: Iconclass subject classification for Dublin Core metadata
+  - `common.py`: Shared utilities and JSON-LD formatting for Dublin Core compliance
+  - `metadata_enhancer.py`: Main orchestrator for the enhancement pipeline
 - `test/`: tests for the data and source code
 - `report.md`: a report describing the analysis of the data
 
@@ -28,6 +32,9 @@ The structure of this repository follows the [Advanced Structure for Data Analys
 This repository contains Dublin Core metadata enhancement tools and workflows designed to improve the quality and completeness of Dublin Core metadata records. The data includes:
 
 - **Enhancement Workflows**: Reproducible processes for enriching Dublin Core metadata
+- **AI-Powered Alt Text Generation**: WCAG 2.2-compliant alternative text using ChatGPT-5
+- **Iconclass Subject Classification**: Automated subject classification using controlled vocabulary
+- **JSON-LD Output**: Standards-compliant output format with timestamped metadata
 - **Validation Tools**: Scripts and utilities for quality assurance of enhanced metadata
 - **Documentation**: Comprehensive guides and examples for using the enhancement pipelines
 - **Test Data**: Sample Dublin Core records for testing and validation purposes
@@ -40,7 +47,11 @@ Data models and field mappings are documented in the [documentation/](documentat
 
 ### Metadata Enhancement Pipeline
 
-This repository includes an automated metadata enhancement pipeline that generates WCAG 2.2-compliant alternative text for images using OpenAI's newest GPT-5 model.
+This repository includes an automated metadata enhancement pipeline that:
+
+1. **Generates WCAG 2.2-compliant alternative text** for images using OpenAI's ChatGPT-5 model
+2. **Classifies content using Iconclass** controlled vocabulary for subject terms
+3. **Outputs timestamped JSON-LD** following Dublin Core metadata standards
 
 #### Prerequisites
 
@@ -63,18 +74,24 @@ export OPENAI_API_KEY="your-openai-api-key-here"
 #### Usage
 
 ```bash
-# Enhance metadata from the default source
+# Enhance metadata from the default source (outputs timestamped JSON-LD)
 uv run python enhance_metadata.py
 
 # Specify custom metadata URL and output file
 # Run enhancement on remote metadata
-uv run python enhance_metadata.py --metadata-url "https://example.com/metadata.json" --output "enhanced_metadata.json"
+uv run python enhance_metadata.py --metadata-url "https://example.com/metadata.json" --output "enhanced_metadata.jsonld"
 
 # Run enhancement on local metadata file
-uv run python enhance_metadata.py --metadata-url "data/local_metadata.json" --output "enhanced_local.json"
+uv run python enhance_metadata.py --metadata-url "data/local_metadata.json" --output "enhanced_local.jsonld"
 
 # Use API key from command line
 uv run python enhance_metadata.py --api-key "your-api-key"
+
+# Configure Iconclass classification (optional)
+export ICONCLASS_ENABLE=true
+export ICONCLASS_TOP_K=5
+export ICONCLASS_LANG=de
+export ICONCLASS_VALIDATE=true
 
 # Development commands
 uv run pytest                    # Run tests
@@ -83,15 +100,25 @@ uv run ruff format .             # Format code with ruff
 uv run ruff check .              # Lint code with ruff
 ```
 
+#### Modular Architecture
+
+The enhancement pipeline is built with a modular architecture:
+
+- **Alt Text Generator** (`src/alt_text_generator.py`): Generates WCAG-compliant alternative text using ChatGPT-5
+- **Iconclass Classifier** (`src/iconclass_classifier.py`): Provides subject classification using Iconclass controlled vocabulary
+- **Common Utilities** (`src/common.py`): Shared functionality including JSON-LD formatting and file handling
+- **Metadata Enhancer** (`src/metadata_enhancer.py`): Main orchestrator that combines all modules
+
 #### How it works
 
 The enhancement pipeline:
 
 1. **Loads** Dublin Core metadata from a JSON source (local file or URL)
 2. **Downloads** thumbnail images (object_thumb field) - images are pre-optimized by omeka
-3. **Analyzes** images using GPT-5 with contextual metadata
+3. **Analyzes** images using ChatGPT-5 with contextual metadata
 4. **Generates** WCAG-compliant alternative text in German
-5. **Outputs** enhanced metadata as JSON
+5. **Classifies** content using Iconclass controlled vocabulary (optional)
+6. **Outputs** enhanced metadata as timestamped JSON-LD
 
 The AI prompt is designed to:
 
@@ -102,19 +129,78 @@ The AI prompt is designed to:
 
 #### Output Format
 
+The pipeline outputs timestamped JSON-LD files following Dublin Core standards:
+
 ```json
 {
-	"objectid": "example001",
-	"alt_text": "Karte von Basel als befestigte Grenzstadt, umgeben von Breisgau und Sundgau.",
-	"longdesc": ""
+  "@context": {
+    "dc": "http://purl.org/dc/terms/",
+    "dcmitype": "http://purl.org/dc/dcmitype/",
+    "edm": "http://www.europeana.eu/schemas/edm/",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@type": "edm:DataSet",
+  "dc:created": {
+    "@value": "2024-01-15T10:30:00.000Z",
+    "@type": "xsd:dateTime"
+  },
+  "dc:creator": {
+    "@id": "https://github.com/maehr/dublin-core-metadata-enhancer",
+    "foaf:name": "Dublin Core Metadata Enhancer"
+  },
+  "dc:description": "Enhanced Dublin Core metadata with AI-generated alt text and Iconclass subject classification",
+  "edm:providedCHO": [
+    {
+      "@type": "edm:ProvidedCHO",
+      "dc:identifier": "example001",
+      "dc:description": {
+        "@type": "edm:AltText",
+        "@value": "Karte von Basel als befestigte Grenzstadt, umgeben von Breisgau und Sundgau.",
+        "@language": "de"
+      },
+      "dc:subject": [
+        {
+          "@id": "https://iconclass.org/25F",
+          "skos:notation": "25F",
+          "skos:prefLabel": [
+            {
+              "@value": "Stadtansicht",
+              "@language": "de"
+            },
+            {
+              "@value": "city view",
+              "@language": "en"
+            }
+          ],
+          "edm:confidence": 0.86,
+          "skos:inScheme": {
+            "@id": "https://iconclass.org/",
+            "skos:prefLabel": "Iconclass"
+          }
+        }
+      ]
+    }
+  ]
 }
 ```
+
+#### Iconclass Configuration
+
+The Iconclass classification module can be configured using environment variables. See [ICONCLASS_CONFIG.md](ICONCLASS_CONFIG.md) for detailed configuration options.
 
 #### Testing
 
 ```bash
-# Run tests
-python -m unittest test.test_metadata_enhancer
+# Run all tests
+python -m pytest test/
+
+# Run specific module tests
+python -m pytest test/test_alt_text_generator.py
+python -m pytest test/test_iconclass_classifier.py
+python -m pytest test/test_common.py
+python -m pytest test/test_metadata_enhancer.py
 ```
 
 ### Citation and Data Access

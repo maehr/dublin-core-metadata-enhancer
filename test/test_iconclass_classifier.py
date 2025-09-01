@@ -60,10 +60,7 @@ class TestIconclassClassifier(unittest.TestCase):
         mock_response = Mock()
         mock_response.status_code = 200
         mock_response.json.return_value = {
-            "prefLabel": {
-                "de": "Stadtansicht",
-                "en": "city view"
-            }
+            "prefLabel": {"de": "Stadtansicht", "en": "city view"}
         }
         mock_get.return_value = mock_response
 
@@ -144,11 +141,14 @@ class TestIconclassClassifier(unittest.TestCase):
 
     def test_configuration_environment_variables(self):
         """Test that configuration is read from environment variables."""
-        with patch.dict(os.environ, {
-            "ICONCLASS_TOP_K": "3",
-            "ICONCLASS_LANG": "en",
-            "ICONCLASS_VALIDATE": "false"
-        }):
+        with patch.dict(
+            os.environ,
+            {
+                "ICONCLASS_TOP_K": "3",
+                "ICONCLASS_LANG": "en",
+                "ICONCLASS_VALIDATE": "false",
+            },
+        ):
             classifier = IconclassClassifier()
 
             self.assertEqual(classifier.top_k, 3)

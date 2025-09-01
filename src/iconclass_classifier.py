@@ -7,6 +7,7 @@ using Iconclass subject terms with URIs as recommended by DCMI.
 """
 
 import json
+import logging
 import os
 import re
 import time
@@ -18,14 +19,16 @@ import requests
 class IconclassClassifier:
     """Classifies objects using Iconclass subject terms."""
 
-    def __init__(self, openai_client=None):
+    def __init__(self, openai_client=None, logger=None):
         """
         Initialize the Iconclass classifier.
 
         Args:
             openai_client: Optional OpenAI client for LLM-based classification
+            logger: Optional logger instance
         """
         self.openai_client = openai_client
+        self.logger = logger or logging.getLogger(__name__)
 
         # Configuration from environment variables
         self.top_k = int(os.getenv("ICONCLASS_TOP_K", "5"))
@@ -78,7 +81,7 @@ class IconclassClassifier:
                 "notation": notation,
                 "label_de": label_de,
                 "label_en": label_en,
-                "uri": f"https://iconclass.org/{notation}"
+                "uri": f"https://iconclass.org/{notation}",
             }
 
         except Exception:
@@ -102,20 +105,20 @@ class IconclassClassifier:
         for term in terms:
             try:
                 response = requests.get(
-                    self.search_url,
-                    params={"q": term, "lang": self.lang},
-                    timeout=20
+                    self.search_url, params={"q": term, "lang": self.lang}, timeout=20
                 )
 
                 if response.status_code == 200:
                     data = response.json()
                     # Expect list of {notation, label, score} - adapt if API differs
                     for item in data[:10]:  # Limit to top 10 per term
-                        candidates.append({
-                            "notation": item.get("notation"),
-                            "label": item.get("label"),
-                            "score": item.get("score", 0.5)
-                        })
+                        candidates.append(
+                            {
+                                "notation": item.get("notation"),
+                                "label": item.get("label"),
+                                "score": item.get("score", 0.5),
+                            }
+                        )
 
             except Exception:
                 continue
@@ -158,13 +161,13 @@ Respond as JSON array of objects:
 [{{"notation":"…","label_de":"…","label_en":"…","why":"…"}}]
 Use valid Iconclass codes (e.g., 25F, 31A, 52D1). Prefer German labels when possible.
 
-title: {obj.get('title', '')}
-description: {obj.get('description', '')}
+title: {obj.get("title", "")}
+description: {obj.get("description", "")}
 subject: {subject_str}
 creator: {creator_str}
 relation: {relation_str}
-era/date: {obj.get('coverage', '')} {obj.get('date', '')}
-language: {obj.get('language', '')}"""
+era/date: {obj.get("coverage", "")} {obj.get("date", "")}
+language: {obj.get("language", "")}"""
 
     def get_llm_candidates(self, prompt: str) -> list[dict[str, Any]]:
         """
@@ -181,16 +184,16 @@ language: {obj.get('language', '')}"""
 
         try:
             response = self.openai_client.chat.completions.create(
-                model="gpt-4o",  # Use gpt-4o instead of gpt-5 for more reliability
+                model="gpt-5",  # Use gpt-5 consistently as requested
                 messages=[
                     {
                         "role": "system",
-                        "content": "Return only JSON. Use valid Iconclass notations."
+                        "content": "Return only JSON. Use valid Iconclass notations.",
                     },
-                    {"role": "user", "content": prompt}
+                    {"role": "user", "content": prompt},
                 ],
                 temperature=0.2,
-                max_tokens=600
+                max_tokens=600,
             )
 
             content = response.choices[0].message.content
@@ -278,7 +281,7 @@ language: {obj.get('language', '')}"""
                     "notation": notation,
                     "score": 0.0,
                     "label_de": candidate.get("label_de") or candidate.get("label"),
-                    "label_en": candidate.get("label_en")
+                    "label_en": candidate.get("label_en"),
                 }
 
             # Update with highest score
@@ -330,25 +333,24 @@ language: {obj.get('language', '')}"""
 
         # Second pass: fill remaining slots by score
         if len(selected) < self.top_k:
-            remaining = [
-                c for c in validated_candidates
-                if c not in selected
-            ]
+            remaining = [c for c in validated_candidates if c not in selected]
             remaining.sort(key=lambda x: x["score"], reverse=True)
-            selected.extend(remaining[:self.top_k - len(selected)])
+            selected.extend(remaining[: self.top_k - len(selected)])
 
         # 8) Format final output
         subjects = []
-        for candidate in selected[:self.top_k]:
-            subjects.append({
-                "valueURI": candidate["uri"],
-                "notation": candidate["notation"],
-                "prefLabel": {
-                    "de": candidate.get("label_de"),
-                    "en": candidate.get("label_en")
-                },
-                "confidence": round(float(candidate.get("score", 0.7)), 2),
-                "scheme": "Iconclass"
-            })
+        for candidate in selected[: self.top_k]:
+            subjects.append(
+                {
+                    "valueURI": candidate["uri"],
+                    "notation": candidate["notation"],
+                    "prefLabel": {
+                        "de": candidate.get("label_de"),
+                        "en": candidate.get("label_en"),
+                    },
+                    "confidence": round(float(candidate.get("score", 0.7)), 2),
+                    "scheme": "Iconclass",
+                }
+            )
 
         return subjects

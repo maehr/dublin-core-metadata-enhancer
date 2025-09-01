@@ -188,6 +188,24 @@ class TestMetadataEnhancer(unittest.TestCase):
             result = main()
             self.assertEqual(result, 1)  # Should return error code
 
+    @patch.dict(os.environ, {"ICONCLASS_ENABLE": "true", "ICONCLASS_VALIDATE": "false"})
+    def test_iconclass_integration_enabled(self):
+        """Test that Iconclass classification is integrated when enabled."""
+        # Create enhancer with Iconclass enabled
+        enhancer = MetadataEnhancer("test-api-key")
+
+        # Verify configuration
+        self.assertTrue(enhancer.iconclass_enabled)
+
+    @patch.dict(os.environ, {"ICONCLASS_ENABLE": "false"})
+    def test_iconclass_integration_disabled(self):
+        """Test that Iconclass classification can be disabled."""
+        # Create enhancer with Iconclass disabled
+        enhancer = MetadataEnhancer("test-api-key")
+
+        # Verify configuration
+        self.assertFalse(enhancer.iconclass_enabled)
+
 
 if __name__ == "__main__":
     unittest.main()

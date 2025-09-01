@@ -1,0 +1,95 @@
+[
+  {
+    "objectid": "example001",
+    "alt_text": "Karte von Basel als befestigte Grenzstadt, umgeben von Breisgau und Sundgau.",
+    "longdesc": "",
+    "subjects": [
+      {
+        "valueURI": "https://iconclass.org/25F",
+        "notation": "25F",
+        "prefLabel": {
+          "de": "Stadtansicht",
+          "en": "city view"
+        },
+        "confidence": 0.86,
+        "scheme": "Iconclass"
+      },
+      {
+        "valueURI": "https://iconclass.org/62",
+        "notation": "62",
+        "prefLabel": {
+          "de": "Karte",
+          "en": "map"
+        },
+        "confidence": 0.83,
+        "scheme": "Iconclass"
+      },
+      {
+        "valueURI": "https://iconclass.org/31A",
+        "notation": "31A",
+        "prefLabel": {
+          "de": "Bewaffneter Soldat",
+          "en": "armed soldier"
+        },
+        "confidence": 0.80,
+        "scheme": "Iconclass"
+      },
+      {
+        "valueURI": "https://iconclass.org/11H",
+        "notation": "11H",
+        "prefLabel": {
+          "de": "Heilige (allgemein)",
+          "en": "saints (general)"
+        },
+        "confidence": 0.72,
+        "scheme": "Iconclass"
+      },
+      {
+        "valueURI": "https://iconclass.org/6",
+        "notation": "6",
+        "prefLabel": {
+          "de": "Geschichte",
+          "en": "history"
+        },
+        "confidence": 0.70,
+        "scheme": "Iconclass"
+      }
+    ]
+  },
+  {
+    "objectid": "example002",
+    "alt_text": "Porträt eines Gelehrten mit Büchern und Schreibutensilien.",
+    "subjects": [
+      {
+        "valueURI": "https://iconclass.org/31A",
+        "notation": "31A",
+        "prefLabel": {
+          "de": "Porträt",
+          "en": "portrait"
+        },
+        "confidence": 0.92,
+        "scheme": "Iconclass"
+      },
+      {
+        "valueURI": "https://iconclass.org/49L",
+        "notation": "49L",
+        "prefLabel": {
+          "de": "Schreiben",
+          "en": "writing"
+        },
+        "confidence": 0.78,
+        "scheme": "Iconclass"
+      },
+      {
+        "valueURI": "https://iconclass.org/49M",
+        "notation": "49M",
+        "prefLabel": {
+          "de": "Buch",
+          "en": "book"
+        },
+        "confidence": 0.75,
+        "scheme": "Iconclass"
+      }
+    ]
+  }
+]
